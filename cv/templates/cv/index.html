@@ -1,0 +1,69 @@
+{% extends "foundation/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Héctor Pablos López - Full stack developer{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cv/style.css' %}" />
+{% endblock css %}
+
+{% block base_body %}
+    <div class="hero">
+        <div class="row">
+                <div class="large-12 columns intro-text">
+                    <p>Hi there!<br>I take outdoor pictures.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row about">
+        <div class="medium-6 large-8 columns">
+            <h4>About</h4>
+            <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
+        </div>
+        <div class="medium-6 large-4 columns">
+            <img src="{% static 'cv/images/portfolio5.png' %}">
+        </div>
+    </div>
+    <div class="row work">
+        <hr>
+        <div class="large-12 columns">
+            <h4>Work</h4>
+            <p>Click on each image to view my work!</p>
+            {% for work_experience in work_experiences %}
+            <div class="row work-experience">
+                <div class="large-12 columns">
+                    <h3>{{ work_experience.role }}</h3>
+                    <div class="large-6 columns">
+
+                      <h5>Company</h5>
+                      <p>{{ work_experience.company }}</p>
+                      <h5>Duration</h5>
+                      <p>{{ work_experience.start_date|date:"F Y" }} -
+                          {% if work_experience.end_date %}
+                            {{ work_experience.end_date|date:"F Y" }}
+                          {% else %}
+                            current
+                          {% endif %}
+                          ({{ work_experience.start_date|timesince:work_experience.end_date }})</p>
+
+                      <h5>Technologies</h5>
+                      <p>{{ work_experience.company }}</p>
+
+                    </div>
+
+                    <div class="large-6 columns">
+
+                      <br>
+
+                      <h5>Work Description</h5>
+                      <p>{{ work_experience.description }}</p>
+
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock base_body %}
